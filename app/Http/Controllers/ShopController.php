@@ -18,7 +18,8 @@ class ShopController extends Controller
 
     public function myCart()
     {
-        $my_carts = Cart::all();
+        $user_id = Auth::id();
+        $my_carts = Cart::where('user_id',$user_id)->get();
         return view('mycart',compact('my_carts'));
         
     }

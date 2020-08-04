@@ -8,7 +8,7 @@
             {{ Auth::user()->name }}さんのカートの中身</h1>
 
             <div class="">
-                <p class="text-center">{{ $message }}</p><br>
+                <p class="text-center">{{ $message ?? '' }}</p><br>
                 <div class="d-flex flex-row flex-wrap">
 
                     @foreach($my_carts as $my_cart)
