@@ -14,6 +14,8 @@
 Route::get('/', 'ShopController@index');
 Route::get('/mycart', 'ShopController@myCart')->middleware('auth');
 Route::post('/mycart', 'ShopController@addMycart');
+Route::post('/cartdelete','ShopController@deleteCart');
+Route::post('/checkout', 'ShopController@checkout');
 // Route::get('/', function () {
 //     return view('welcome');
 // });
