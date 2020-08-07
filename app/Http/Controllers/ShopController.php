@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Cart;
 
+use Illuminate\Support\Facades\Mail;
+use App\Mail\Thanks;
 
 class ShopController extends Controller
 {
@@ -46,9 +48,14 @@ class ShopController extends Controller
        return view('mycart',$data)->with('message', $message);
    }
 
-   public function checkout(Cart $cart)
+   public function checkout(Request $request,Cart $cart)
    {
-       $checkout_info = $cart->checkoutCart();
+
+       $user = Auth::user();
+       $mail_data['user']=$user->name; //追記
+       $mail_data['checkout_items']=$cart->checkoutCart(); //編集
+       Mail::to($user->email)->send(new Thanks($mail_data));//編集
        return view('checkout');
+
    }
 }
